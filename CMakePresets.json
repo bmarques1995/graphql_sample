@@ -71,14 +71,14 @@
       {
         "name": "linux-debug",
         "displayName": "Linux Debug",
-        "generator": "Ninja",
+        "generator": "Unix Makefiles",
         "binaryDir": "${sourceDir}/out/lin_build/${presetName}",
         "installDir": "${sourceDir}/Linux/Debug",
         "cacheVariables": {
           "CMAKE_C_COMPILER": "clang",
           "CMAKE_CXX_COMPILER": "clang++",
           "CMAKE_PREFIX_PATH": "${sourceDir}/Linux/Debug",
-          "BUILD_SHARED_LIBS": true,
+          "BUILD_SHARED_LIBS": false,
           "CMAKE_BUILD_TYPE": "Debug"
         },
         "condition": {
@@ -102,7 +102,7 @@
           "CMAKE_C_COMPILER": "clang",
           "CMAKE_CXX_COMPILER": "clang++",
           "CMAKE_PREFIX_PATH": "${sourceDir}/Linux/Release",
-          "BUILD_SHARED_LIBS": true,
+          "BUILD_SHARED_LIBS": false,
           "CMAKE_BUILD_TYPE": "Release"
         },
         "condition": {

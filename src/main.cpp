@@ -3,6 +3,8 @@
 #include <mailio/mailboxes.hpp>
 #include <mailio/message.hpp>
 #include <mailio/smtp.hpp>
+#include <mailio/mime.hpp>
+
 
 int main(int argc, char** argv)
 {
@@ -24,26 +26,30 @@ int main(int argc, char** argv)
 
                 try
                 {
+                    mailio::codec::line_len_policy_t lenghtLine;
+                    lenghtLine = mailio::codec::line_len_policy_t::VERYLARGE;
+                    std::string msgContent = R"(Esse veio do C++ e vou mandar um <a href="https://store.steampowered.com">link</a>, mas agora com o teste do final, vamos encher esse email com <br/> uma mensagem absolutamente sem sentido para testar as quebras de linha)";
                     // create mail message
                     mailio::message msg;
                     msg.from(mailio::mail_address("Pairmeet Dev", "pairmeetdev@gmail.com"));// set the correct sender name and address
-                    msg.add_recipient(mailio::mail_address("B Marques", "testebash@outlook.com"));// set the correct recipent name and address
+                    msg.add_recipient(mailio::mail_address("B Marques", "pairmeetdev@gmail.com"));// set the correct recipent name and address
                     msg.subject("smtps multipart message");
-                    msg.boundary("012456789@mailio.dev");
-                    msg.content_type(mailio::message::media_type_t::MULTIPART, "related");
-                    msg.content("<p>Esse veio do C++</p>");
+                    //msg.boundary("012456789@mailio.dev");
+                    msg.content_type(mailio::message::media_type_t::TEXT, "html", "utf-8");
+                    msg.line_policy(lenghtLine, lenghtLine);
+                    msg.content(msgContent);
 
-                    mailio::mime title;
+                    /*mailio::mime title;
                     title.content_type(mailio::message::media_type_t::TEXT, "html", "utf-8");
                     title.content_transfer_encoding(mailio::mime::content_transfer_encoding_t::BIT_8);
                     title.content("<html><head></head><body><h1>Senior Call</h1></body></html>");
 
-                    msg.add_part(title);
+                    msg.add_part(title);*/
 
                     // connect to server
                     mailio::smtps conn("smtp.gmail.com", 465);
                     // modify username/password to use real credentials
-                    conn.authenticate("pairmeetdev@gmail.com", "i'm not crazy", mailio::smtps::auth_method_t::LOGIN);
+                    conn.authenticate("pairmeetdev@gmail.com", "huehuehue", mailio::smtps::auth_method_t::LOGIN);
                     conn.submit(msg);
                 }
                 catch (mailio::smtp_error& exc)

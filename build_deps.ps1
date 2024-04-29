@@ -9,7 +9,7 @@ if (($buildMode -eq "Debug" -or $buildMode -eq "Release"))
     Set-Location ./modules/openssl
     Write-Host "$install_prefix"
     Start-Process vcvars64.bat
-    perl ./Configure VC-WIN64A --prefix="$install_prefix" --openssldir="$install_prefix/openssl" -shared
+    perl ./Configure VC-WIN64A "--$buildMode.ToLower()" --prefix="$install_prefix" --openssldir="$install_prefix/openssl" -shared
     nmake
     nmake install
     Set-Location ../..
