@@ -28,7 +28,7 @@ int main(int argc, char** argv)
                 {
                     mailio::codec::line_len_policy_t lenghtLine;
                     lenghtLine = mailio::codec::line_len_policy_t::VERYLARGE;
-                    std::string msgContent = R"(Esse veio do C++ e vou mandar um <a href="https://store.steampowered.com">link</a>, mas agora com o teste do final, vamos encher esse email com <br/> uma mensagem absolutamente sem sentido para testar as quebras de linha)";
+                    std::string msgContent = R"(<html><head><style>.container{background-color:#0f0}</style></head><body><p class="container">Esse veio do C++ e vou mandar um <a href="https://store.steampowered.com">link</a>, mas agora com o teste do final, vamos encher esse email com uma mensagem absolutamente sem sentido para testar as quebras de linha</p></body></html>)";
                     // create mail message
                     mailio::message msg;
                     msg.from(mailio::mail_address("Pairmeet Dev", "pairmeetdev@gmail.com"));// set the correct sender name and address
