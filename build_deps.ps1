@@ -28,6 +28,9 @@ if (($buildMode -eq "Debug" -or $buildMode -eq "Release"))
     git clone --recursive https://github.com/karastojko/mailio.git ./modules/mailio 
     cmake -S ./modules/mailio -B ./dependencies/mailio -DCMAKE_INSTALL_PREFIX="./Windows/$buildMode" -DMAILIO_BUILD_DOCUMENTATION=OFF
     cmake --build ./dependencies/mailio --config "$buildMode" --target install
+    git clone --recursive https://github.com/microsoft/cppgraphqlgen.git ./modules/cppgraphqlgen
+    cmake -S ./modules/cppgraphqlgen -B ./dependencies/cppgraphqlgen -DCMAKE_INSTALL_PREFIX="./Windows/$buildMode" -DGRAPHQL_USE_RAPIDJSON=OFF -DGRAPHQL_BUILD_SCHEMAGEN=OFF -DGRAPHQL_BUILD_CLIENTGEN=OFF -DBUILD_SHARED_LIBS=ON
+    cmake --build ./dependencies/cppgraphqlgen --config "$buildMode" --target install
 }
 else 
 {

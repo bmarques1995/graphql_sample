@@ -66,6 +66,16 @@ int main(int argc, char** argv)
         },
         { drogon::Get });
 
+    drogon::app().registerHandler(
+        "/gql_route",
+        [](const drogon::HttpRequestPtr&,
+            std::function<void(const drogon::HttpResponsePtr&)>&& callback) {
+                auto resp = drogon::HttpResponse::newHttpResponse();
+                resp->setBody("Hello, World!");
+                callback(resp);
+        },
+        { drogon::Post });
+
     drogon::app()
         .addListener("127.0.0.1", 8080)
         .setThreadNum(3)

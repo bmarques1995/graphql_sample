@@ -20,11 +20,12 @@ set(TARGET_NAME graphql_sample)
 find_package(Drogon REQUIRED)
 find_package(Boost REQUIRED COMPONENTS system date_time url)
 find_package(mailio REQUIRED)
+find_package(cppgraphqlgen REQUIRED COMPONENTS graphqlservice graphqlpeg graphqlresponse graphqlclient)
 
 add_executable(${TARGET_NAME} ${GQL_HDRS} ${GQL_SRCS})
 target_include_directories(${TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src" "${CMAKE_PREFIX_PATH}/include")
 target_link_directories(${TARGET_NAME} PUBLIC "${CMAKE_PREFIX_PATH}/lib")
-target_link_libraries(${TARGET_NAME} PUBLIC Drogon::Drogon mailio)
+target_link_libraries(${TARGET_NAME} PUBLIC Drogon::Drogon mailio cppgraphqlgen::graphqlservice cppgraphqlgen::graphqlclient cppgraphqlgen::graphqlpeg cppgraphqlgen::graphqlresponse)
 
 set_target_properties(${TARGET_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_PREFIX_PATH}/bin")
 set_target_properties(${TARGET_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_PREFIX_PATH}/bin")

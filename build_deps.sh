@@ -38,7 +38,9 @@ then
     git clone --recursive https://github.com/karastojko/mailio.git ./modules/mailio 
     cmake -S ./modules/mailio -B ./dependencies/linux/mailio -DCMAKE_INSTALL_PREFIX="./Linux/$buildMode" -DMAILIO_BUILD_DOCUMENTATION=OFF -DCMAKE_BUILD_TYPE="$buildMode" -DBUILD_SHARED_LIBS=OFF
     cmake --build ./dependencies/linux/mailio --target install
-
+    git clone --recursive https://github.com/microsoft/cppgraphqlgen.git ./modules/cppgraphqlgen
+    cmake -S ./modules/cppgraphqlgen -B ./dependencies/cppgraphqlgen -DCMAKE_INSTALL_PREFIX="./Windows/$buildMode" -DGRAPHQL_USE_RAPIDJSON=OFF -DGRAPHQL_BUILD_SCHEMAGEN=OFF -DGRAPHQL_BUILD_CLIENTGEN=OFF
+    cmake --build ./dependencies/cppgraphqlgen --config "$buildMode" --target install
 else 
     echo "Invalid build args"
 fi
